@@ -1,0 +1,47 @@
+<%- include ("../../partials/header.ejs") %>
+<%- include ("../../partials/homeNavbar.ejs") %>
+
+<body>
+  <div class="container">
+    <hr />
+
+    <div class="row">
+      <% if (result.articles && result.articles.length > 0) { %>
+        <% result.articles.forEach(article => { %>
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h2><%= article.title %></h2>
+              </div>
+              <div class="card-body">
+                <a class="btn btn-success" href="/<%= article.slug %>">Ler Artigo</a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>Nenhum artigo encontrado.</p>
+      <% } %>
+    </div>
+
+    <div class="row">
+      <div class="col col-li">
+        <% if (result.page > 2 ) { %>
+          <a style="float: left;" href="/articles/page/<%= result.page - 1 %>"><< Prev</a>
+       <% } else if(result.page == 2) { %>
+        <a style="float: left;" href="/"><< Prev</a>
+
+        <% } %>
+        
+       
+        <% if (result.next) { %>
+          <a style="float: right;" href="/articles/page/<%= result.page + 1 %>">Next >></a>
+        <% } %>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <br />
+
+<%- include ("../../partials/footer.ejs") %>
+</body>

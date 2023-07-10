@@ -1,0 +1,70 @@
+<%- include ("../../partials/header.ejs") %>
+ <%- include ("../../partials/navbar.ejs") %>
+<div class="container">
+  <hr />
+  <h2>Artigos</h2>
+  <a href="/admin/articles/new" class="btn btn-success">
+    Criar novo Artigo
+  </a>
+  <hr />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>
+        id
+      </th>
+      <th>
+        titulo
+      </th>
+      <th>
+        Slug
+      </th>
+      <th>
+        Categoria
+      </th>
+      <th>
+        Ações
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+        <% articles.forEach(article => { %>
+            <tr>
+              <td>
+              <%= article.id %>
+              </td>
+            <td>
+              <%= article.title %>
+            </td>
+            <td>
+              <%= article.slug %>
+            </td>
+            <td>
+                <%= article.category.title %>
+              </td>
+              <td>
+                <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-warning">Editar</a>
+
+     
+       <form action="/articles/delete" method="POST" style="display: inline;" onsubmit="confiDelet(event, this)">
+        <input type="hidden" name="id" value="<%= article.id %>">
+       <button class="btn btn-danger">Excluir</button>
+      </input>
+    </form>
+              </td>
+            </tr>
+            <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include ("../../partials/footer.ejs") %>
+
+<script>
+const confiDelet = (event, form) =>{
+event.preventDefault();
+let decision = confirm("Você tem certeza que quer deletar?")
+if(decision){
+  form.submit()
+}
+}
+</script>

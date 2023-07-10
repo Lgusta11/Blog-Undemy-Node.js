@@ -1,0 +1,33 @@
+<%- include ("../../partials/header.ejs") %> <%- include
+("../../partials/navbar.ejs") %>
+<div class="conteiner">
+  <hr />
+  <div class="card">
+    <div class="card-header">
+      <h2>Editar Usuario</h2>
+    </div>
+    <div class="card-body">
+      <form method="POST" action="/users/update">
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          placeholder="Defina um titulo para a categoria!"
+          value="<%= user.email %>"
+        />
+        <br>
+        <input
+          class="form-control"
+          type="password"
+          name="password"
+          placeholder="Digite sua nova senha"
+          value="<%= user.password %>"
+        />
+        <input type="hidden" name="id" value="<%= user.id %>">
+        <br />
+        <button class="btn btn-success">Atualizar</button>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include ("../../partials/footer.ejs") %>
